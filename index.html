@@ -399,4 +399,246 @@ flame.addEventListener('click', () => {
   wishHint.textContent = 'wish made ✨';
   wishMessage.classList.add('show');
   launchConfetti();
+}});
+function launchConfetti(){
+  const colors = ['#FF6F91', '#F4B860', '#B796E0', '#FFD9E3'];
+  for (let i = 0; i < 60; i++){
+    const piece = document.createElement('div');
+    piece.className = 'confetti';
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    const duration = 2.5 + Math.random() * 1.5;
+    const rotate = Math.random() * 720 - 360;
+    piece.style.transition = `transform ${duration}s cubic-bezier(.2,.6,.2,1), opacity ${duration}s linear`;
+    document.body.appendChild(piece);
+    requestAnimationFrame(() => {
+      piece.style.transform = `translateY(${window.innerHeight + 40}px) rotate(${rotate}deg)`;
+      piece.style.opacity = '0.2';
+    });
+    setTimeout(() => piece.remove(), duration * 1000 + 100);
+  }
 }
+
+// ---- Poetry data ----
+const poems = [
+  {
+    id: 'sonnet18',
+    title: "Sonnet 18 — Shall I compare thee to a summer's day?",
+    author: "William Shakespeare",
+    tags: ['beauty','eternity','classic','shakespeare'],
+    note: "This is the one everyone quotes, but I get why now — it's the closest thing I've found to how I actually see you.",
+    text: `Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer's lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance, or nature's changing course, untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow'st;
+Nor shall Death brag thou wander'st in his shade,
+When in eternal lines to time thou grow'st:
+So long as men can breathe or eyes can see,
+So long lives this, and this gives life to thee.`
+  },
+  {
+    id: 'sonnet116',
+    title: "Sonnet 116 — Let me not to the marriage of true minds",
+    author: "William Shakespeare",
+    tags: ['devotion','steadfast','classic','shakespeare'],
+    note: "This one's about love that doesn't bend when things get hard. That's the kind I want to give you.",
+    text: `Let me not to the marriage of true minds
+Admit impediments. Love is not love
+Which alters when it alteration finds,
+Or bends with the remover to remove:
+O no! it is an ever-fixed mark
+That looks on tempests and is never shaken;
+It is the star to every wandering bark,
+Whose worth's unknown, although his height be taken.
+Love's not Time's fool, though rosy lips and cheeks
+Within his bending sickle's compass come:
+Love alters not with his brief hours and weeks,
+But bears it out even to the edge of doom.
+If this be error and upon me proved,
+I never writ, nor no man ever loved.`
+  },
+  {
+    id: 'brightstar',
+    title: "Bright Star, would I were stedfast as thou art",
+    author: "John Keats",
+    tags: ['devotion','beauty','keats','tender'],
+    note: "Keats wanted to be steady, like a star watching over the person he loved. Reading this made me think of every quiet night I've thought about you.",
+    text: `Bright star, would I were stedfast as thou art—
+Not in lone splendour hung aloft the night,
+And watching, with eternal lids apart,
+Like nature's patient sleepless Eremite,
+The moving waters at their priestlike task
+Of pure ablution round earth's human shores,
+Or gazing on the new soft fallen mask
+Of snow upon the mountains and the moors—
+No—yet still stedfast, still unchangeable,
+Pillow'd upon my fair love's ripening breast,
+To feel for ever its soft fall and swell,
+Awake for ever in a sweet unrest,
+Still, still to hear her tender-taken breath,
+And so live ever—or else swoon to death.`
+  },
+  {
+    id: 'howdoilove',
+    title: "Sonnet 43 — How Do I Love Thee?",
+    author: "Elizabeth Barrett Browning",
+    tags: ['devotion','depth','classic','tender'],
+    note: "She tries to count the ways. I've tried that too, with you, and I always run out of numbers before I run out of reasons.",
+    text: `How do I love thee? Let me count the ways.
+I love thee to the depth and breadth and height
+My soul can reach, when feeling out of sight
+For the ends of being and ideal grace.
+I love thee to the level of every day's
+Most quiet need, by sun and candle-light.
+I love thee freely, as men strive for right;
+I love thee purely, as they turn from praise.
+I love thee with the passion put to use
+In my old griefs, and with my childhood's faith.
+I love thee with a love I seemed to lose
+With my lost saints—I love thee with the breath,
+Smiles, tears, of all my life!—and, if God choose,
+I shall but love thee better after death.`
+  },
+  {
+    id: 'shewalks',
+    title: "She Walks in Beauty",
+    author: "Lord Byron",
+    tags: ['beauty','grace','byron','tender'],
+    note: "Byron wrote this after seeing a woman across a room and being unable to look away. That's roughly my situation, every single day, with you.",
+    text: `She walks in beauty, like the night
+Of cloudless climes and starry skies;
+And all that's best of dark and bright
+Meet in her aspect and her eyes:
+Thus mellow'd to that tender light
+Which heaven to gaudy day denies.
+
+One shade the more, one ray the less,
+Had half impair'd the nameless grace
+Which waves in every raven tress,
+Or softly lightens o'er her face;
+Where thoughts serenely sweet express
+How pure, how dear their dwelling-place.
+
+And on that cheek, and o'er that brow,
+So soft, so calm, yet eloquent,
+The smiles that win, the tints that glow,
+But tell of days in goodness spent,
+A mind at peace with all below,
+A heart whose love is innocent!`
+  },
+  {
+    id: 'redrose',
+    title: "A Red, Red Rose",
+    author: "Robert Burns",
+    tags: ['promise','simple','burns','tender'],
+    note: "Simple words, but they hold up. I'd say all of this to you, plainly, no poetry needed — but he already said it better than I could.",
+    text: `O my Luve is like a red, red rose,
+That's newly sprung in June;
+O my Luve is like the melody,
+That's sweetly play'd in tune.
+
+As fair art thou, my bonnie lass,
+So deep in luve am I;
+And I will luve thee still, my dear,
+Till a' the seas gang dry.
+
+Till a' the seas gang dry, my dear,
+And the rocks melt wi' the sun;
+And I will luve thee still, my dear,
+While the sands o' life shall run.
+
+And fare thee weel, my only luve,
+And fare thee weel a while!
+And I will come again, my luve,
+Tho' it were ten thousand mile.`
+  }
+];
+
+let activeTag = null;
+
+function uniqueTags(){
+  const set = new Set();
+  poems.forEach(p => p.tags.forEach(t => { if(t !== p.author.toLowerCase().split(' ').pop()) set.add(t); }));
+  return Array.from(set).filter(t => !['shakespeare','keats','byron','burns','classic'].includes(t)).slice(0,6);
+}
+
+function renderTags(){
+  const tagRow = document.getElementById('tagRow');
+  const tags = ['all', ...uniqueTags()];
+  tagRow.innerHTML = tags.map(t =>
+    `<button class="tag-chip ${activeTag === t || (t==='all' && !activeTag) ? 'active' : ''}" data-tag="${t}">${t}</button>`
+  ).join('');
+  tagRow.querySelectorAll('.tag-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      activeTag = chip.dataset.tag === 'all' ? null : chip.dataset.tag;
+      renderTags();
+      renderList(document.getElementById('poemSearch').value);
+    });
+  });
+}
+
+function renderList(query){
+  const list = document.getElementById('poemList');
+  const q = (query || '').trim().toLowerCase();
+  const filtered = poems.filter(p => {
+    const matchesTag = !activeTag || p.tags.includes(activeTag);
+    const haystack = (p.title + ' ' + p.author + ' ' + p.tags.join(' ') + ' ' + p.note).toLowerCase();
+    const matchesQuery = !q || haystack.includes(q);
+    return matchesTag && matchesQuery;
+  });
+
+  if(filtered.length === 0){
+    list.innerHTML = '<div class="no-results">No poems match that — try another word, or clear the search.</div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(p => `
+    <div class="poem-card" data-id="${p.id}">
+      <div class="ptitle">${p.title}</div>
+      <div class="pauthor">${p.author}</div>
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.poem-card').forEach(card => {
+    card.addEventListener('click', () => openPoem(card.dataset.id));
+  });
+}
+
+function openPoem(id){
+  const poem = poems.find(p => p.id === id);
+  if(!poem) return;
+  document.getElementById('poetry-browse').style.display = 'none';
+  const detail = document.getElementById('poetry-detail');
+  detail.style.display = 'block';
+  detail.innerHTML = `
+    <button class="back-btn" id="backToList">&larr; back to all poems</button>
+    <div class="poem-detail">
+      <div class="dtitle">${poem.title}</div>
+      <div class="dauthor">${poem.author}</div>
+      <div class="dnote">${poem.note}</div>
+      <div class="dtext">${poem.text}</div>
+    </div>
+  `;
+  document.getElementById('backToList').addEventListener('click', () => {
+    detail.style.display = 'none';
+    document.getElementById('poetry-browse').style.display = 'block';
+  });
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+document.getElementById('poemSearch').addEventListener('input', (e) => {
+  renderList(e.target.value);
+});
+
+renderTags();
+renderList('');
+</script>
+</body>
+</html>
